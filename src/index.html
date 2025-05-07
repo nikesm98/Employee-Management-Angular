@@ -6,8 +6,68 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-..."
+    crossorigin="anonymous"
+  >
+  <style>
+    /* full-screen semi-opaque backdrop */
+    #pill-loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    #pill-loader .pill {
+      --min: 40px;
+      --max: 70px;
+      --delay: 0s;
+      width: var(--min);
+      height: 30px;
+      margin: 0 5px;
+      border-radius: 20px;
+      background-color: #ced4da;          /* Bootstrap gray-300 */
+      animation: expand 2s ease-in-out infinite alternate both;
+      animation-delay: var(--delay);
+    }
+    @keyframes expand {
+      from { width: var(--min); }
+      to   { width: var(--max); }
+    }
+  </style>
 </head>
 <body>
+  <div id="pill-loader">
+    <div class="pill" style="--delay: 0s;"></div>
+    <div class="pill" style="--delay: 0.5s;"></div>
+    <div class="pill" style="--delay: 1s;"></div>
+    <div class="pill" style="--delay: 1.5s;"></div>
+    <div class="pill" style="--delay: 2s;"></div>
+  </div>
   <app-root></app-root>
+
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('pill-loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        loader.style.transition = 'opacity 0.3s ease-out';
+        setTimeout(() => loader.remove(), 300);
+      }
+    });
+  </script>
+
+  <!-- (optional) Bootstrap JS bundle -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-..."
+    crossorigin="anonymous">
+  </script>
 </body>
 </html>
